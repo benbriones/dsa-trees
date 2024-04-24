@@ -4,7 +4,14 @@ import { TreeNodeNum } from "../common/tree";
  * Returns an array of values of visited nodes. */
 
 function preOrder(node: TreeNodeNum | null): number[] {
-  return [42];
+  if (node === null) {
+    return [];
+  }
+  const values = [node.val];
+  for (const child of node!.children) {
+    values.push(...preOrder(child));
+  }
+  return values;
 }
 
 
@@ -12,7 +19,15 @@ function preOrder(node: TreeNodeNum | null): number[] {
  * Returns an array of values of visited nodes. */
 
 function postOrder(node: TreeNodeNum | null): number[] {
-  return [42];
+  if (node === null) {
+    return [];
+  }
+  const values = [];
+  for (const child of node!.children) {
+    values.push(...postOrder(child));
+  }
+  values.push(node.val);
+  return values;
 }
 
 export { preOrder, postOrder };
